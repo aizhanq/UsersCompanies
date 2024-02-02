@@ -10,7 +10,7 @@ using UsersCompanies.DAL.Interfaces;
 
 namespace UsersCompanies.DAL.Repositories
 {
-    public class JobRepository : IRepository<Job>
+    public class JobRepository : IJobRepository
     {
         private ApplicationContext _context;
         public JobRepository(ApplicationContext context)
@@ -18,29 +18,29 @@ namespace UsersCompanies.DAL.Repositories
             this._context = context;
         }
 
-        public async Task<IEnumerable<Job>> GetAllAsync()
+        public async Task<IEnumerable<Job>> GetJobsAsync()
         {
             return await _context.Jobs.ToListAsync();
         }
 
-        public async Task<Job> GetByIdAsync(int jobId)
+        public async Task<Job> GetJobByIdAsync(int jobId)
         {
             return await _context.Jobs.FindAsync(jobId);
         }
 
-        public async Task CreateAsync(Job job)
+        public async Task CreateJobAsync(Job job)
         {
             _context.Jobs.Add(job);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(Job job)
+        public async Task UpdateJobAsync(Job job)
         {
             _context.Entry(job).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int jobId)
+        public async Task DeleteJobAsync(int jobId)
         {
             var job = await _context.Jobs.FindAsync(jobId);
             if (job != null)

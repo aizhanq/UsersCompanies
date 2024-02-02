@@ -10,7 +10,7 @@ using UsersCompanies.DAL.Interfaces;
 
 namespace UsersCompanies.DAL.Repositories
 {
-    public class CompanyRepository : IRepository<Company>
+    public class CompanyRepository : ICompanyRepository
     {
         private ApplicationContext _context;
         public CompanyRepository(ApplicationContext context)
@@ -18,29 +18,29 @@ namespace UsersCompanies.DAL.Repositories
             this._context = context;
         }
 
-        public async Task<IEnumerable<Company>> GetAllAsync()
+        public async Task<IEnumerable<Company>> GetCompaniesAsync()
         {
             return await _context.Companies.ToListAsync();
         }
 
-        public async Task<Company> GetByIdAsync(int companyId)
+        public async Task<Company> GetCompanyByIdAsync(int companyId)
         {
             return await _context.Companies.FindAsync(companyId);
         }
 
-        public async Task CreateAsync(Company company)
+        public async Task CreateCompanyAsync(Company company)
         {
             _context.Companies.Add(company);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(Company company)
+        public async Task UpdateCompanyAsync(Company company)
         {
             _context.Entry(company).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int companyId)
+        public async Task DeleteCompanyAsync(int companyId)
         {
             var company = await _context.Companies.FindAsync(companyId);
             if (company != null)

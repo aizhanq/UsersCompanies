@@ -10,9 +10,9 @@ namespace UsersCompanies.DAL.Interfaces
 {
     public interface IUnitOfWork
     {
-        IRepository<Company> Companies { get; }
-        IRepository<User> Users { get; }
-        IRepository<Job> Jobs { get; }
+        ICompanyRepository Companies { get; }
+        IUserRepository Users { get; }
+        IJobRepository Jobs { get; }
 
         Task<int> SaveChangesAsync();
     }

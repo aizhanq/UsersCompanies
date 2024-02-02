@@ -22,17 +22,17 @@ namespace UsersCompanies.DAL.Repositories
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
-        public IRepository<Company> Companies
+        public ICompanyRepository Companies
         {
             get { return companyRepository ??= new CompanyRepository(_context); }
         }
 
-        public IRepository<User> Users
+        public IUserRepository Users
         {
             get { return userRepository ??= new UserRepository(_context); }
         }
 
-        public IRepository<Job> Jobs
+        public IJobRepository Jobs
         {
             get { return jobRepository ??= new JobRepository(_context); }
         }

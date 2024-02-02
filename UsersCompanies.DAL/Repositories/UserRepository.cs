@@ -10,7 +10,7 @@ using UsersCompanies.DAL.Interfaces;
 
 namespace UsersCompanies.DAL.Repositories
 {
-    public class UserRepository : IRepository<User>
+    public class UserRepository : IUserRepository
     {
         private ApplicationContext _context;
         public UserRepository(ApplicationContext context)
@@ -18,29 +18,29 @@ namespace UsersCompanies.DAL.Repositories
             this._context = context;
         }
 
-        public async Task<IEnumerable<User>> GetAllAsync()
+        public async Task<IEnumerable<User>> GetUsersAsync()
         {
             return await _context.Users.ToListAsync();
         }
 
-        public async Task<User> GetByIdAsync(int userId)
+        public async Task<User> GetUserByIdAsync(int userId)
         {
             return await _context.Users.FindAsync(userId);
         }
 
-        public async Task CreateAsync(User user)
+        public async Task CreateUserAsync(User user)
         {
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(User user)
+        public async Task UpdateUserAsync(User user)
         {
             _context.Entry(user).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int userId)
+        public async Task DeleteUserAsync(int userId)
         {
             var user = await _context.Users.FindAsync(userId);
             if (user != null)
@@ -50,15 +50,15 @@ namespace UsersCompanies.DAL.Repositories
             }
         }
 
-        //// TODO
-        //public async Task<IEnumerable<Job>> GetJobsByUserIdAsync(int userId)
-        //{
-        //    var jobs = await _context.Users
-        //        .Where(u => u.Id == userId)
-        //        .Select(u => u.Jobs)
-        //        .ToListAsync();
+        // TODO
+        public async Task<IEnumerable<Job>> GetJobsByUserIdAsync(int userId)
+        {
+            var jobs = await _context.UserJobs
+                .Where(uj => uj.UserId == userId)
+                .Select(uj => uj.Job)
+                .ToListAsync();
 
-        //    return null;
-        //}                     
+            return jobs;
+        }
     }
 }
