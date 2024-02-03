@@ -1,27 +1,32 @@
+using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using UsersCompanies.DAL.EF;
+using UsersCompanies.DAL.Interfaces;
+using UsersCompanies.DAL.Repositories;
+using UsersCompanies.Web.MapppingProfiles;
+using UsersCompany.BLL.Interfaces;
+using UsersCompany.BLL.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-var app = builder.Build();
+// AutoMapper
+builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
-// Initialize database
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    try
-    {
-        var context = services.GetRequiredService<ApplicationContext>();
-        DbInitializer.Initialize(context);
-    }
-    catch (Exception ex)
-    {
-        var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred while seeding the database.");
-    }
-}
+// DbContext
+builder.Services.AddDbContext<ApplicationContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Dependency Injection
+builder.Services.AddScoped<IUnitOfWork, EFUnitOfWork>();
+builder.Services.AddScoped<ICompanyService, CompanyService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IJobService, JobService>();
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -41,5 +46,10 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+// Initialize database
+using var scope = app.Services.CreateScope();
+var initializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+initializer.Initialize();
 
 app.Run();

@@ -4,12 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UsersCompanies.DAL.Entities;
+using UsersCompanies.DAL.Interfaces;
 
 namespace UsersCompanies.DAL.EF
 {
-    public class DbInitializer
+    public class DbInitializer : IDbInitializer
     {
-        public static void Initialize(ApplicationContext context)
+        private readonly ApplicationContext context;
+
+        public DbInitializer(ApplicationContext context)
+        {
+            this.context = context;
+        }
+
+        public void Initialize()
         {
             context.Database.EnsureCreated();
 

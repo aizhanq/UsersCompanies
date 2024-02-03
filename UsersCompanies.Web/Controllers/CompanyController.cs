@@ -7,10 +7,15 @@ namespace UsersCompanies.Web.Controllers
 {
     public class CompanyController : Controller
     {
-        ICompanyService companyService;
+        ICompanyService _companyService;
         public CompanyController(ICompanyService serv)
         {
-            companyService = serv;
-        }       
+            _companyService = serv;
+        }
+        public async Task<ActionResult<IEnumerable<CompanyDTO>>> GetCompanies()
+        {
+            var employees = await _companyService.GetCompaniesAsync();
+            return View(employees);
+        }
     }
 }
