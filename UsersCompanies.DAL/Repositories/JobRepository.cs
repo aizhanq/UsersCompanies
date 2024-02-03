@@ -15,7 +15,7 @@ namespace UsersCompanies.DAL.Repositories
         private ApplicationContext _context;
         public JobRepository(ApplicationContext context)
         {
-            this._context = context;
+            _context = context;
         }
 
         public async Task<IEnumerable<Job>> GetJobsAsync()
