@@ -59,5 +59,15 @@ namespace UsersCompanies.DAL.Repositories
             if(users != null) Debug.WriteLine("Mapping user Repository");
             return users;
         }
+
+        public async Task<IEnumerable<Job>> GetJobsByCompanyIdAsync(int companyId)
+        {
+            var jobs = await _context.Jobs
+                .ToListAsync();
+            if (jobs == null) Debug.WriteLine("Mapping user Repository jobs == null");
+            Debug.WriteLine("Mapping user Repository" + jobs.FirstOrDefault().Name);
+            return jobs;
+
+        }
     }
 }

@@ -50,15 +50,15 @@ namespace UsersCompanies.DAL.Repositories
             }
         }
 
-        // TODO
-        public async Task<IEnumerable<Job>> GetJobsByUserIdAsync(int userId)
-        {
-            var jobs = await _context.UserJobs
-                .Where(uj => uj.UserId == userId)
-                .Select(uj => uj.Job)
-                .ToListAsync();
+        //// TODO
+        //public async Task<IEnumerable<Job>> GetJobsByUserIdAsync(int userId)
+        //{
+        //    var jobs = await _context.UserJob
+        //        .Where(uj => uj.UserId == userId)
+        //        .Select(uj => uj.Job)
+        //        .ToListAsync();
 
-            return jobs;
-        }
+        //    return jobs;
+        //}
     }
 }

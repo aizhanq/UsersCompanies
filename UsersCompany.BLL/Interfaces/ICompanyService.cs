@@ -14,7 +14,7 @@ namespace UsersCompany.BLL.Interfaces
         Task CreateCompanyAsync(CompanyDTO companyDTO);
         Task UpdateCompanyAsync(CompanyDTO companyDTO);
         Task DeleteCompanyAsync(int companyId);
-
         Task<IEnumerable<UserDTO>> GetUsersByCompanyIdAsync(int companyId);
+        Task<IEnumerable<JobDTO>> GetJobsByCompanyIdAsync(int companyId);
     }
 }

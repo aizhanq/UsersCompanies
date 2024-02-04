@@ -62,10 +62,10 @@ namespace UsersCompany.BLL.Services
             await _unitOfWork.Users.DeleteUserAsync(userId);
         }
 
-        public async Task<IEnumerable<JobDTO>> GetJobsByUserIdAsync(int userId)
-        {
-            var jobs = await _unitOfWork.Users.GetJobsByUserIdAsync(userId);
-            return _mapper.Map<IEnumerable<JobDTO>>(jobs);
-        }
+        //public async Task<IEnumerable<JobDTO>> GetJobsByUserIdAsync(int userId)
+        //{
+        //    var jobs = await _unitOfWork.Users.GetJobsByUserIdAsync(userId);
+        //    return _mapper.Map<IEnumerable<JobDTO>>(jobs);
+        //}
     }
 }

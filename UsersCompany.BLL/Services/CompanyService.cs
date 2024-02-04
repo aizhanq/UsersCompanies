@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -68,6 +69,12 @@ namespace UsersCompany.BLL.Services
             var users = await _unitOfWork.Companies.GetUsersByCompanyIdAsync(companyId);
             if (users != null) Debug.WriteLine("Mapping user Service");
             return _mapper.Map<IEnumerable<UserDTO>>(users);
+        }
+
+        public async Task<IEnumerable<JobDTO>> GetJobsByCompanyIdAsync(int companyId)
+        {
+            var jobs = await _unitOfWork.Companies.GetJobsByCompanyIdAsync(companyId);
+            return _mapper.Map<IEnumerable<JobDTO>>(jobs);
         }
     }
 }

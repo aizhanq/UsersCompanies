@@ -13,7 +13,6 @@ namespace UsersCompanies.DAL.EF
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Company> Companies { get; set; } = null!;
         public DbSet<Job> Jobs { get; set; } = null!;
-        public DbSet<UserJob> UserJobs {  get; set; } = null!;
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
            : base(options)
@@ -28,20 +27,21 @@ namespace UsersCompanies.DAL.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
             modelBuilder.Entity<UserJob>()
                 .HasKey(uj => new { uj.UserId, uj.JobId });
 
             modelBuilder.Entity<UserJob>()
-               .HasOne(ep => ep.User)
+               .HasOne(uj => uj.User)
                .WithMany()
-               .HasForeignKey(ep => ep.UserId);
+               .HasForeignKey(uj => uj.UserId);
 
             modelBuilder.Entity<UserJob>()
-                .HasOne(ep => ep.Job)
+                .HasOne(uj => uj.Job)
                 .WithMany()
-                .HasForeignKey(ep => ep.JobId);
+                .HasForeignKey(uj => uj.JobId);
+
+            modelBuilder.Entity<UserJob>()
+                .HasIndex(uj => new { uj.UserId, uj.JobId });
         }
     }
 }
