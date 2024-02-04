@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using UsersCompanies.DAL.Entities;
 using UsersCompanies.Web.Models;
@@ -17,6 +18,7 @@ namespace UsersCompanies.Web.Controllers
         {
             _companyService = serv;
         }
+
         public async Task<ActionResult<IEnumerable<CompanyDTO>>> GetCompanies()
         {
             IEnumerable<CompanyDTO> companyDtos = await _companyService.GetCompaniesAsync();
@@ -37,6 +39,7 @@ namespace UsersCompanies.Web.Controllers
             return View(company);
         }
 
+        [HttpGet]
         public ActionResult CreateCompany()
         {
             return View();
@@ -50,14 +53,13 @@ namespace UsersCompanies.Web.Controllers
             return Redirect("/Company/GetCompanies");
         }
 
-        public async Task<ActionResult<IEnumerable<UserDTO>>> GetUsersByCompanyId(int companyId)
+        [HttpGet]
+        public async Task<ActionResult> EditCompany(int id)
         {
-            if(companyId == 0) Debug.WriteLine("companyId == 0, start of method");
-            IEnumerable<UserDTO> userDtos = await _companyService.GetUsersByCompanyIdAsync(companyId);
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDTO, UserViewModel>()).CreateMapper();
-            var users = mapper.Map<IEnumerable<UserDTO>, List<UserViewModel>>(userDtos);
-            if (companyId == 0) Debug.WriteLine("companyId == 0, end of method");
-            return View(users);
+            var companyDto = await _companyService.GetCompanyByIdAsync(id);
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CompanyDTO, CompanyViewModel>()).CreateMapper();
+            var company = mapper.Map<CompanyDTO, CompanyViewModel>(companyDto);
+            return View(company);
         }
 
         public async Task<IActionResult> DeleteCompany(int id)
@@ -72,6 +74,16 @@ namespace UsersCompanies.Web.Controllers
             await _companyService.DeleteCompanyAsync(id);
 
             return Redirect("/Company/GetCompanies");
+        }
+
+        public async Task<ActionResult<IEnumerable<UserDTO>>> GetUsersByCompanyId(int companyId)
+        {
+            if (companyId == 0) Debug.WriteLine("companyId == 0, start of method");
+            IEnumerable<UserDTO> userDtos = await _companyService.GetUsersByCompanyIdAsync(companyId);
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDTO, UserViewModel>()).CreateMapper();
+            var users = mapper.Map<IEnumerable<UserDTO>, List<UserViewModel>>(userDtos);
+            if (companyId == 0) Debug.WriteLine("companyId == 0, end of method");
+            return View(users);
         }
     }
 }
