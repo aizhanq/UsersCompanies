@@ -109,7 +109,7 @@ namespace UsersCompanies.DAL.Migrations
 
                     b.HasIndex("UserId", "JobId");
 
-                    b.ToTable("UserJob");
+                    b.ToTable("UserJobs");
                 });
 
             modelBuilder.Entity("JobUser", b =>

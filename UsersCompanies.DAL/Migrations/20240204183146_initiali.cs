@@ -81,7 +81,7 @@ namespace UsersCompanies.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserJob",
+                name: "UserJobs",
                 columns: table => new
                 {
                     UserId = table.Column<int>(type: "int", nullable: false),
@@ -89,15 +89,15 @@ namespace UsersCompanies.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserJob", x => new { x.UserId, x.JobId });
+                    table.PrimaryKey("PK_UserJobs", x => new { x.UserId, x.JobId });
                     table.ForeignKey(
-                        name: "FK_UserJob_Jobs_JobId",
+                        name: "FK_UserJobs_Jobs_JobId",
                         column: x => x.JobId,
                         principalTable: "Jobs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserJob_Users_UserId",
+                        name: "FK_UserJobs_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -110,13 +110,13 @@ namespace UsersCompanies.DAL.Migrations
                 column: "UsersId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserJob_JobId",
-                table: "UserJob",
+                name: "IX_UserJobs_JobId",
+                table: "UserJobs",
                 column: "JobId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserJob_UserId_JobId",
-                table: "UserJob",
+                name: "IX_UserJobs_UserId_JobId",
+                table: "UserJobs",
                 columns: new[] { "UserId", "JobId" });
 
             migrationBuilder.CreateIndex(
@@ -131,7 +131,7 @@ namespace UsersCompanies.DAL.Migrations
                 name: "JobUser");
 
             migrationBuilder.DropTable(
-                name: "UserJob");
+                name: "UserJobs");
 
             migrationBuilder.DropTable(
                 name: "Jobs");

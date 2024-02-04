@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UsersCompanies.DAL.Entities;
 
 namespace UsersCompanies.DAL.EF
@@ -28,19 +23,20 @@ namespace UsersCompanies.DAL.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder.Entity<UserJob>()
-                .HasKey(uj => new { uj.UserId, uj.JobId });
+                    .HasKey(uj => new { uj.UserId, uj.JobId });
 
             modelBuilder.Entity<UserJob>()
                .HasOne(uj => uj.User)
-               .WithMany()
-               .HasForeignKey(uj => uj.UserId);
+               .WithMany()  // Указываем свойство, через которое происходит связь с User
+               .HasForeignKey(uj => uj.UserId)
+               .OnDelete(DeleteBehavior.Restrict); // При необходимости можно изменить поведение удаления
 
             modelBuilder.Entity<UserJob>()
                 .HasOne(uj => uj.Job)
-                .WithMany()
-                .HasForeignKey(uj => uj.JobId);
+                .WithMany()  // Указываем свойство, через которое происходит связь с Job
+                .HasForeignKey(uj => uj.JobId)
+                .OnDelete(DeleteBehavior.Restrict); // При необходимости можно изменить поведение удаления
 
             modelBuilder.Entity<UserJob>()
                 .HasIndex(uj => new { uj.UserId, uj.JobId });

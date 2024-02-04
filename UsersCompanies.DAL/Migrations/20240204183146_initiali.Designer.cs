@@ -11,7 +11,7 @@ using UsersCompanies.DAL.EF;
 namespace UsersCompanies.DAL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240204180707_initiali")]
+    [Migration("20240204183146_initiali")]
     partial class initiali
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -111,7 +111,7 @@ namespace UsersCompanies.DAL.Migrations
 
                     b.HasIndex("UserId", "JobId");
 
-                    b.ToTable("UserJob");
+                    b.ToTable("UserJobs");
                 });
 
             modelBuilder.Entity("JobUser", b =>

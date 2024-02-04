@@ -56,20 +56,19 @@ namespace UsersCompanies.DAL.Repositories
             var users = await _context.Users
                 .Where(u => u.CompanyId == companyId)
                 .ToListAsync();
-            if(users != null) Debug.WriteLine("Mapping user Repository");
+
             return users;
         }
 
         public async Task<IEnumerable<Job>> GetJobsByCompanyIdAsync(int companyId)
         {
-            var jobs = await _context.UserJobs
-        .Where(uj => uj.User.CompanyId == companyId)
-        .Select(uj => uj.Job)
-        .Distinct()
-        .ToListAsync();
-            Debug.WriteLine("AAAAAAAAAAAAAAAAA Mapping user Repository" + jobs.FirstOrDefault().Name);
-            return jobs;
+            var jobs = await _context.Users
+                .Where(u => u.CompanyId == companyId)
+                .SelectMany(u => u.Jobs)
+                .Distinct()
+                .ToListAsync();
 
+            return jobs;
         }
     }
 }
