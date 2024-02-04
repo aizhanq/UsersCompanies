@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,7 +56,7 @@ namespace UsersCompanies.DAL.Repositories
             var users = await _context.Users
                 .Where(u => u.CompanyId == companyId)
                 .ToListAsync();
-
+            if(users != null) Debug.WriteLine("Mapping user Repository");
             return users;
         }
     }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -65,6 +66,7 @@ namespace UsersCompany.BLL.Services
         public async Task<IEnumerable<UserDTO>> GetUsersByCompanyIdAsync(int companyId)
         {
             var users = await _unitOfWork.Companies.GetUsersByCompanyIdAsync(companyId);
+            if (users != null) Debug.WriteLine("Mapping user Service");
             return _mapper.Map<IEnumerable<UserDTO>>(users);
         }
     }

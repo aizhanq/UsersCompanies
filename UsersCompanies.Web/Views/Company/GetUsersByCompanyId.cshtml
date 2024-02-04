@@ -1,14 +1,11 @@
-﻿@model IEnumerable<UsersCompanies.Web.Models.CompanyViewModel>
+﻿@model IEnumerable<UsersCompanies.Web.Models.UserViewModel>
 
 @{
-    ViewBag.Title = "Companies";
+    ViewBag.Title = "Users";
 }
 
-<h2>Companies</h2>
+<h2>Users</h2>
 
-<p>
-    <a asp-action="CreateCompany">Create New</a>
-</p>
 
 <table class="table">
     <tr>
@@ -25,11 +22,11 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.ActionLink("Users", "GetUsersByCompanyId", new { companyId = item.Id })
+                @Html.ActionLink("Users", "GetUsersByCompanyId", new { id = item.Id })
                 @Html.ActionLink("Jobs", "GetJobsByCompanyId", new { id = item.Id })
             </td>
             <td>
-                @Html.ActionLink("Details", "GetCompanyById", new { id = item.Id })
+                @Html.ActionLink("Details", "GetUsersByCompanyId", new { id = item.Id })
                 @Html.ActionLink("Edit", "EditCompany", new { id = item.Id })
                 @Html.ActionLink("Delete", "DeleteCompany", new { id = item.Id })
             </td>

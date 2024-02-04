@@ -23,7 +23,7 @@ namespace UsersCompanies.DAL.EF
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Connecting lazy loading
-            //optionsBuilder.UseLazyLoadingProxies();
+            optionsBuilder.UseLazyLoadingProxies();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -32,6 +32,16 @@ namespace UsersCompanies.DAL.EF
 
             modelBuilder.Entity<UserJob>()
                 .HasKey(uj => new { uj.UserId, uj.JobId });
+
+            modelBuilder.Entity<UserJob>()
+               .HasOne(ep => ep.User)
+               .WithMany()
+               .HasForeignKey(ep => ep.UserId);
+
+            modelBuilder.Entity<UserJob>()
+                .HasOne(ep => ep.Job)
+                .WithMany()
+                .HasForeignKey(ep => ep.JobId);
         }
     }
 }

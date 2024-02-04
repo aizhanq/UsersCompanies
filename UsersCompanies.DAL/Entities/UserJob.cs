@@ -8,9 +8,9 @@ namespace UsersCompanies.DAL.Entities
 {
     public class UserJob
     {
-        public User User { get; set; }
+        public virtual User User { get; set; }
         public int UserId { get; set; }
-        public Job Job { get; set; }
+        public virtual Job Job { get; set; }
         public int JobId { get; set; }
     }
 }
