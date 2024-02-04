@@ -23,5 +23,30 @@ namespace UsersCompanies.Web.Controllers
             var companies = mapper.Map<IEnumerable<CompanyDTO>, List<CompanyViewModel>>(companyDtos);
             return View(companies);
         }
+
+        public async Task<ActionResult<CompanyDTO>> GetCompanyById(int id)
+        {
+            CompanyDTO company = await _companyService.GetCompanyByIdAsync(id);
+            
+            if(company == null)
+            {
+                return NotFound();
+            }
+
+            return View(company);
+        }
+
+        public ActionResult CreateCompany()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateCompany(CompanyViewModel company)
+        {
+            var companyDTO = new CompanyDTO { Name = company.Name };
+            await _companyService.CreateCompanyAsync(companyDTO);
+            return Redirect("/Company/GetCompanies");
+        }
     }
 }

@@ -4,7 +4,11 @@
     ViewBag.Title = "Companies";
 }
 
-<h2>Index</h2>
+<h2>Companies</h2>
+
+<p>
+    <a asp-action="CreateCompany">Create New</a>
+</p>
 
 <table class="table">
     <tr>
@@ -21,7 +25,13 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.ActionLink("Order", "MakeOrder", new { id = item.Id })
+                @Html.ActionLink("Users", "GetUsersByCompanyId", new { id = item.Id })
+                @Html.ActionLink("Jobs", "GetJobsByCompanyId", new { id = item.Id })
+            </td>
+            <td>
+                @Html.ActionLink("Details", "GetUsersByCompanyId", new { id = item.Id })
+                @Html.ActionLink("Edit", "EditCompany", new { id = item.Id })
+                @Html.ActionLink("Delete", "DeleteCompany", new { id = item.Id })
             </td>
         </tr>
     }

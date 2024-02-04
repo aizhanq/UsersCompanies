@@ -45,7 +45,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Company}/{action=GetCompanies}/{id?}");
 
 // Initialize database
 using var scope = app.Services.CreateScope();
