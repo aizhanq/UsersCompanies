@@ -14,7 +14,6 @@ namespace UsersCompanies.Web.Controllers
     public class CompanyController : Controller
     {
         ICompanyService _companyService;
-        private readonly IMapper _mapper;
         public CompanyController(ICompanyService serv)
         {
             _companyService = serv;

@@ -28,15 +28,15 @@ namespace UsersCompanies.DAL.EF
 
             modelBuilder.Entity<UserJob>()
                .HasOne(uj => uj.User)
-               .WithMany()  // Указываем свойство, через которое происходит связь с User
+               .WithMany() 
                .HasForeignKey(uj => uj.UserId)
-               .OnDelete(DeleteBehavior.Restrict); // При необходимости можно изменить поведение удаления
+               .OnDelete(DeleteBehavior.Restrict); 
 
             modelBuilder.Entity<UserJob>()
                 .HasOne(uj => uj.Job)
-                .WithMany()  // Указываем свойство, через которое происходит связь с Job
+                .WithMany() 
                 .HasForeignKey(uj => uj.JobId)
-                .OnDelete(DeleteBehavior.Restrict); // При необходимости можно изменить поведение удаления
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<UserJob>()
                 .HasIndex(uj => new { uj.UserId, uj.JobId });
