@@ -13,6 +13,7 @@ namespace UsersCompanies.DAL.EF
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Company> Companies { get; set; } = null!;
         public DbSet<Job> Jobs { get; set; } = null!;
+        public DbSet<UserJob> UserJobs { get; set; } = null!;
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
            : base(options)
@@ -27,6 +28,7 @@ namespace UsersCompanies.DAL.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<UserJob>()
                 .HasKey(uj => new { uj.UserId, uj.JobId });
 

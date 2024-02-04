@@ -33,6 +33,7 @@ namespace UsersCompanies.DAL.EF
             User user2 = new User { Name = "Bob", Age = 25, Company = company2 };
             User user3 = new User { Name = "Sam", Age = 28, Company = company2 };
             Job job1 = new Job { Name = "Make orders"};
+            user2.Jobs.Add(job1);
 
             context.Companies.AddRange(company1, company2);
             context.Users.AddRange(user1, user2, user3);
