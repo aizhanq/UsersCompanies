@@ -48,6 +48,7 @@ namespace UsersCompanies.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCompany(CompanyViewModel company)
         {
+            if (company.Name == null) return View();
             var companyDTO = new CompanyDTO { Name = company.Name };
             await _companyService.CreateCompanyAsync(companyDTO);
             return Redirect("/Company/GetCompanies");
@@ -69,6 +70,8 @@ namespace UsersCompanies.Web.Controllers
             {
                 return View(NotFound());
             }
+
+            if (company.Name == null) return View();
 
             await _companyService.UpdateCompanyAsync(company);
 

@@ -7,7 +7,7 @@
 <h2>Companies</h2>
 
 <p>
-    <a asp-action="CreateCompany">Create New</a>
+    <a asp-action="CreateCompany" class="btn btn-primary">Create New</a>
 </p>
 
 <table class="table">
@@ -25,12 +25,12 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.ActionLink("Users", "GetUsersByCompanyId", new { companyId = item.Id })
-                @Html.ActionLink("Jobs", "GetJobsByCompanyId", new { companyId = item.Id })
+                @Html.ActionLink("Users", "GetUsersByCompanyId", new { companyId = item.Id }, new { @class = "btn btn-warning" })
+                @Html.ActionLink("Jobs", "GetJobsByCompanyId", new { companyId = item.Id }, new { @class = "btn btn-warning" })
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditCompany", new { id = item.Id })
-                @Html.ActionLink("Delete", "DeleteCompany", new { id = item.Id })
+                @Html.ActionLink("Edit", "EditCompany", new { id = item.Id }, new { @class = "btn btn-success" })
+                @Html.ActionLink("Delete", "DeleteCompany", new { id = item.Id }, new { @class = "btn btn-danger" })
             </td>
         </tr>
     }
