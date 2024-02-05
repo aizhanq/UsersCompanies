@@ -1,16 +1,11 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UsersCompanies.DAL.Entities;
-using UsersCompanies.DAL.Interfaces;
-using UsersCompany.BLL.DTO;
-using UsersCompany.BLL.Interfaces;
+using UsersCompanies.Domain.Entities;
+using UsersCompanies.Domain.DTO;
+using UsersCompanies.Domain.Repositories;
+using UsersCompanies.Domain.Services;
 
-namespace UsersCompany.BLL.Services
+namespace UsersCompanies.BLL.Services
 {
     public class UserService : IUserService
     {

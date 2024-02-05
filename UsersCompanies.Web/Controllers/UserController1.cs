@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using UsersCompanies.DAL.Entities;
 using UsersCompanies.Web.Models;
-using UsersCompany.BLL.DTO;
-using UsersCompany.BLL.Interfaces;
-using UsersCompany.BLL.Services;
+using UsersCompanies.Domain.DTO;
+using UsersCompanies.Domain.Services;
 
 namespace UsersCompanies.Web.Controllers
 {

@@ -1,11 +1,11 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using UsersCompanies.DAL.EF;
-using UsersCompanies.DAL.Interfaces;
+using UsersCompanies.DAL.Data;
+using UsersCompanies.Domain.Repositories;
 using UsersCompanies.DAL.Repositories;
 using UsersCompanies.Web.MapppingProfiles;
-using UsersCompany.BLL.Interfaces;
-using UsersCompany.BLL.Services;
+using UsersCompanies.Domain.Services;
+using UsersCompanies.BLL.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +20,7 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Dependency Injection
-builder.Services.AddScoped<IUnitOfWork, EFUnitOfWork>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ICompanyService, CompanyService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IJobService, JobService>();

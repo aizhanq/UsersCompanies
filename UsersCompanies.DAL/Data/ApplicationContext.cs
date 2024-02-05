@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using UsersCompanies.DAL.Entities;
+using UsersCompanies.Domain.Entities;
 
-namespace UsersCompanies.DAL.EF
+namespace UsersCompanies.DAL.Data
 {
     public class ApplicationContext : DbContext
     {

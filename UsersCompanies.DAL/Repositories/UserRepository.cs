@@ -1,12 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UsersCompanies.DAL.EF;
-using UsersCompanies.DAL.Entities;
-using UsersCompanies.DAL.Interfaces;
+using UsersCompanies.DAL.Data;
+using UsersCompanies.Domain.Entities;
+using UsersCompanies.Domain.Repositories;
 
 namespace UsersCompanies.DAL.Repositories
 {

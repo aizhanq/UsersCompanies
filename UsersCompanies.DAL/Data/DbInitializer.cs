@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UsersCompanies.DAL.Entities;
-using UsersCompanies.DAL.Interfaces;
+﻿using UsersCompanies.Domain.Entities;
+using UsersCompanies.Domain.Repositories;
 
-namespace UsersCompanies.DAL.EF
+namespace UsersCompanies.DAL.Data
 {
     public class DbInitializer : IDbInitializer
     {

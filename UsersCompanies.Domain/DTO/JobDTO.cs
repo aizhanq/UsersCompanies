@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UsersCompany.BLL.DTO
+﻿namespace UsersCompanies.Domain.DTO
 {
     public class JobDTO
     {

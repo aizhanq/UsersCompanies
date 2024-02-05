@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UsersCompanies.DAL.Entities;
+﻿using UsersCompanies.Domain.Entities;
 
-namespace UsersCompanies.DAL.Interfaces
+namespace UsersCompanies.Domain.Repositories
 {
     public interface ICompanyRepository
     {

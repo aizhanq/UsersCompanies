@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using UsersCompanies.DAL.Entities;
+using UsersCompanies.Domain.Entities;
 using UsersCompanies.Web.Models;
-using UsersCompany.BLL.DTO;
+using UsersCompanies.Domain.DTO;
 
 namespace UsersCompanies.Web.MapppingProfiles
 {

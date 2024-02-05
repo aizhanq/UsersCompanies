@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UsersCompany.BLL.DTO;
+﻿using UsersCompanies.Domain.DTO;
 
-namespace UsersCompany.BLL.Interfaces
+namespace UsersCompanies.Domain.Services
 {
     public interface IUserService
     {

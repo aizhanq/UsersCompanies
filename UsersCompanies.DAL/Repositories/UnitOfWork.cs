@@ -1,24 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using UsersCompanies.DAL.EF;
-using UsersCompanies.DAL.Entities;
-using UsersCompanies.DAL.Interfaces;
+﻿using UsersCompanies.DAL.Data;
+using UsersCompanies.Domain.Repositories;
 
 namespace UsersCompanies.DAL.Repositories
 {
-    public class EFUnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private ApplicationContext _context;
         private CompanyRepository companyRepository;
         private UserRepository userRepository;
         private JobRepository jobRepository;
 
-        public EFUnitOfWork(ApplicationContext context)
+        public UnitOfWork(ApplicationContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
