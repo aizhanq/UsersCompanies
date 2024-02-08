@@ -60,7 +60,6 @@ namespace UsersCompanies.BLL.Services
         public async Task<IEnumerable<UserDTO>> GetUsersByCompanyIdAsync(int companyId)
         {
             var users = await _unitOfWork.Companies.GetUsersByCompanyIdAsync(companyId);
-            if (users != null) Debug.WriteLine("Mapping user Service");
             return _mapper.Map<IEnumerable<UserDTO>>(users);
         }
 

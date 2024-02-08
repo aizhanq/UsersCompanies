@@ -3,15 +3,20 @@ using Microsoft.AspNetCore.Mvc;
 using UsersCompanies.Web.Models;
 using UsersCompanies.Domain.DTO;
 using UsersCompanies.Domain.Services;
+using NLog;
 
 namespace UsersCompanies.Web.Controllers
 {
     public class CompanyController : Controller
     {
+        private readonly ILogger<CompanyController> _logger;
         ICompanyService _companyService;
-        public CompanyController(ICompanyService serv)
+
+        public CompanyController(ICompanyService serv, ILogger<CompanyController> logger)
         {
             _companyService = serv;
+            _logger = logger;
+            _logger.LogDebug(1, "NLog injected into CompanyController");
         }
 
         public async Task<ActionResult<IEnumerable<CompanyDTO>>> GetCompanies()
@@ -19,6 +24,9 @@ namespace UsersCompanies.Web.Controllers
             IEnumerable<CompanyDTO> companyDtos = await _companyService.GetCompaniesAsync();
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CompanyDTO, CompanyViewModel>()).CreateMapper();
             var companies = mapper.Map<IEnumerable<CompanyDTO>, List<CompanyViewModel>>(companyDtos);
+
+            _logger.LogInformation("Retrieved companies!");
+
             return View(companies);
         }
 
@@ -63,6 +71,7 @@ namespace UsersCompanies.Web.Controllers
         {
             if (company == null)
             {
+                _logger.LogError("EditCompany: Company not found");
                 return View(NotFound());
             }
 
@@ -79,6 +88,7 @@ namespace UsersCompanies.Web.Controllers
 
             if (existingEmployee == null)
             {
+                _logger.LogError("DeleteCompany: Company not found");
                 return View(NotFound());
             }
 
@@ -89,17 +99,21 @@ namespace UsersCompanies.Web.Controllers
 
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetUsersByCompanyId(int companyId)
         {
+            _logger.LogDebug("Getting users by company ID");
             IEnumerable<UserDTO> userDtos = await _companyService.GetUsersByCompanyIdAsync(companyId);
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDTO, UserViewModel>()).CreateMapper();
             var users = mapper.Map<IEnumerable<UserDTO>, List<UserViewModel>>(userDtos);
+            _logger.LogDebug("Retrieved users by company ID");
             return View(users);
         }
 
         public async Task<ActionResult<IEnumerable<JobDTO>>> GetJobsByCompanyId(int companyId)
         {
+            _logger.LogDebug("Getting jobs by company ID");
             IEnumerable<JobDTO> jobDtos = await _companyService.GetJobsByCompanyIdAsync(companyId);
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<JobDTO, JobViewModel>()).CreateMapper();
             var jobs = mapper.Map<IEnumerable<JobDTO>, List<JobViewModel>>(jobDtos);
+            _logger.LogDebug("Retrieved jobs by company ID");
             return View(jobs);
         }
     }
