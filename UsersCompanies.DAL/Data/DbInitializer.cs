@@ -14,7 +14,6 @@ namespace UsersCompanies.DAL.Data
 
         public void Initialize()
         {
-            context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
             // Look for any users
