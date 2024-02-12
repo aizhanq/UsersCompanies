@@ -60,6 +60,7 @@ namespace UsersCompanies.DAL.Repositories
                 .Where(u => u.CompanyId == companyId)
                 .SelectMany(u => u.Jobs)
                 .Distinct()
+                //.OrderBy(p => p.Name)
                 .ToListAsync();
 
             return jobs;
