@@ -14,6 +14,7 @@ namespace UsersCompanies.DAL.Data
 
         public void Initialize()
         {
+            context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
             // Look for any users
@@ -27,16 +28,25 @@ namespace UsersCompanies.DAL.Data
             User user1 = new User { Name = "Tom", Age = 34, Company = company1 };
             User user2 = new User { Name = "Bob", Age = 25, Company = company2 };
             User user3 = new User { Name = "Sam", Age = 28, Company = company2 };
-            Job job1 = new Job { Name = "Important job", Description = "Job for Tom from Google" };
-            Job job2 = new Job { Name = "Another important job", Description = "Job for Sam and Bob from Microsoft" };
-            Job job3 = new Job { Name = "Simple job", Description = "Simple job for Bob from Microsoft" };
-            user1.Jobs.Add(job1);
-            user2.Jobs.Add(job2);
-            user2.Jobs.Add(job3);
-            user3.Jobs.Add(job2);
+            var jobs = new Job[] {
+                new Job { Name = "Package and store finished product", Description = "Job for Tom from Google" },
+                new Job { Name = "Very important job", Description = "Job for Sam and Bob from Microsoft" },
+                new Job { Name = "Simple job", Description = "Simple job for Bob from Microsoft" },
+                new Job { Name = "Order supplies and materials", Description = "Order supplies and materials as needed" },
+                new Job { Name = "Track accounts", Description = "Track accounts payable and accounts receivable" },
+                new Job { Name = "Feedbacks", Description = "Receive and respond to customer feedback" }
+            };
+            user1.Jobs.Add(jobs[0]);
+            user1.Jobs.Add(jobs[3]);
+            user2.Jobs.Add(jobs[2]);
+            user2.Jobs.Add(jobs[3]);
+            user2.Jobs.Add(jobs[1]);
+            user3.Jobs.Add(jobs[2]);
+            user3.Jobs.Add(jobs[4]);
+            user3.Jobs.Add(jobs[5]);
             context.Companies.AddRange(company1, company2);
             context.Users.AddRange(user1, user2, user3);
-            context.Jobs.AddRange(job1, job2, job3);
+            context.Jobs.AddRange(jobs);
             context.SaveChanges();
         }
     }

@@ -10,10 +10,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.ActionLink("Name", "GetJobsByCompanyId", new { companyId = ViewBag.companyId, order = "Name" }, new { @style = "text-decoration: none;" })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.ActionLink("Description", "GetJobsByCompanyId", new { companyId = ViewBag.companyId, order = "Description" }, new { @style = "text-decoration: none;" })
         </th>
         <th></th>
     </tr>

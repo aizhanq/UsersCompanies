@@ -107,12 +107,13 @@ namespace UsersCompanies.Web.Controllers
             return View(users);
         }
 
-        public async Task<ActionResult<IEnumerable<JobDTO>>> GetJobsByCompanyId(int companyId)
+        public async Task<ActionResult<IEnumerable<JobDTO>>> GetJobsByCompanyId(int companyId, string order = "Name")
         {
             _logger.LogDebug("Getting jobs by company ID");
-            IEnumerable<JobDTO> jobDtos = await _companyService.GetJobsByCompanyIdAsync(companyId);
+            IEnumerable<JobDTO> jobDtos = await _companyService.GetJobsByCompanyIdAsync(companyId, order);
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<JobDTO, JobViewModel>()).CreateMapper();
             var jobs = mapper.Map<IEnumerable<JobDTO>, List<JobViewModel>>(jobDtos);
+            ViewBag.companyId = companyId;
             _logger.LogDebug("Retrieved jobs by company ID");
             return View(jobs);
         }

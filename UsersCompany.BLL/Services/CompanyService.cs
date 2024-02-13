@@ -63,9 +63,9 @@ namespace UsersCompanies.BLL.Services
             return _mapper.Map<IEnumerable<UserDTO>>(users);
         }
 
-        public async Task<IEnumerable<JobDTO>> GetJobsByCompanyIdAsync(int companyId)
+        public async Task<IEnumerable<JobDTO>> GetJobsByCompanyIdAsync(int companyId, string order)
         {
-            var jobs = await _unitOfWork.Companies.GetJobsByCompanyIdAsync(companyId);
+            var jobs = await _unitOfWork.Companies.GetJobsByCompanyIdAsync(companyId, order);
             return _mapper.Map<IEnumerable<JobDTO>>(jobs);
         }
     }

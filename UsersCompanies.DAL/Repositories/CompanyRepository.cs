@@ -54,14 +54,29 @@ namespace UsersCompanies.DAL.Repositories
             return users;
         }
 
-        public async Task<IEnumerable<Job>> GetJobsByCompanyIdAsync(int companyId)
+        public async Task<IEnumerable<Job>> GetJobsByCompanyIdAsync(int companyId, string order)
         {
-            var jobs = await _context.Users
+            List<Job> jobs = new();
+            switch (order)
+            {
+                case "Name":
+                    jobs = await _context.Users
                 .Where(u => u.CompanyId == companyId)
                 .SelectMany(u => u.Jobs)
                 .Distinct()
-                //.OrderBy(p => p.Name)
+                .OrderBy(p => p.Name)
                 .ToListAsync();
+                    break;
+
+                case "Description":
+                    jobs = await _context.Users
+                .Where(u => u.CompanyId == companyId)
+                .SelectMany(u => u.Jobs)
+                .Distinct()
+                .OrderBy(p => p.Description)
+                .ToListAsync();
+                    break;           
+            }
 
             return jobs;
         }

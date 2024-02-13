@@ -10,6 +10,6 @@ namespace UsersCompanies.Domain.Services
         Task UpdateCompanyAsync(CompanyDTO companyDTO);
         Task DeleteCompanyAsync(int companyId);
         Task<IEnumerable<UserDTO>> GetUsersByCompanyIdAsync(int companyId);
-        Task<IEnumerable<JobDTO>> GetJobsByCompanyIdAsync(int companyId);
+        Task<IEnumerable<JobDTO>> GetJobsByCompanyIdAsync(int companyId, string order);
     }
 }
